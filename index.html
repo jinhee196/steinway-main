@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>steinway</title>
+    <link rel="shortcut icon" href="image/logo_btm.png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/ef20572bd9.js" crossorigin="anonymous"></script>
+   <script src="js/jquery-1.11.3.min.js"></script>
+   <script>
+    $(function(){
+         
+//        $(".toggle").click(function(){
+//            $(".main_menu").slideToggle();
+//        });
+        
+        
+        
+//        
+//    $(window).resize(function(){
+//                
+//    w = $(window).width(); 
+//    console.log("실시간 화면너비 : " + (w + 16));
+//                
+//        if ( (w + 16) >= 900 ) {  // PC
+//                
+//    $(".main_menu>li").unbind();
+//
+//    $(".main_menu>li").bind({
+//        "mouseenter" : function(){
+//    $(this).children(".sub_menu").stop().slideDown(600);
+//            },
+//        "mouseleave" : function(){
+//    $(this).children(".sub_menu").stop().slideUp();
+//            }
+//        });
+//                
+//                
+//        } else { 
+//
+//    $(".main_menu>li").unbind();//모든 이벤트 제거
+//
+//    $(".main_menu>li").bind("click", function(){
+//$(this).children(".sub_menu").stop().slideToggle();
+//        });
+//
+//    } 
+//               
+//});
+//    $(window).resize();  
+//        
+        
+        
+        
+        
+//        $(".color_list>li").click(function(){
+////             let img = $(this).attr("src");
+//            let color = $(this).index();
+////            let big = $(".slide li img").attr("alt");
+//            $(".slide>li>img").eq(color).stop().fadeIn(500).siblings("img").fadeOut(500);
+//            console.log(color);
+//        });
+//        
+//        function getParentNode(element) {
+//  return element.parentNode;
+//}
+        
+//          //.slide li두번쨰
+//          $(".color_list>li").click(function(){;
+//            let color = $(this).index(); //0,1,2,3
+//            let img = $(".slide>li:nth-child(2)>img").eq(color+2).attr("src");
+//              $(".slide>li:nth-child(2)>img:first-of-type").attr("src", img);
+//            
+//            console.log(color, img);
+//        });
+        
+        
+
+        $(".thumb_imgbox>li").click(function(){
+            
+
+            let num = $(this).index(); //0,1,2
+            console.log(num);
+            if(num >= 2) {num=-1}
+            let posleft = (num+1) * -163;
+            $(".thumb_imgbox").css("left", posleft);
+            
+//            let posleft2 = (num+1) * -1300;
+            $(".slide>li").eq(num+1).fadeIn(1000).siblings("li").fadeOut(1000);
+            
+            $(".txtbox").animate({
+                left: "-400px",
+                opacity: 0
+            }, 500).animate({
+                left: 0,
+                opacity: 1
+            }, 1000);
+        
+          });
+        
+        
+        $(".select").click(function(){
+            $("#color").toggleClass("on");
+        });
+        $(".select").click(function(){
+            $(".slide>li:nth-child(2) #color").toggleClass("on");
+        });
+      
+        
+        
+    $(".slide>li:nth-child(3)>img").mouseover(function(){
+          $(document).mousemove(function(e){
+   
+            $('.info').stop().show().css("top", e.pageY);
+            $('.info').css("left", e.pageX);
+          });
+      });
+    $(".slide>li:nth-child(3)>img").mouseleave(function(){
+          
+          $(document).mousemove(function(e){
+            $('.info').stop().hide();
+         });
+      });
+        
+        
+        
+     playSound = e => {
+        
+const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+const key = document.querySelector(`li[data-key="${e.keyCode}"]`);
+if (audio) {
+audio.currentTime = 0; // 처음으로 되돌리기
+audio.play();
+key.classList.add("playing"); //.playing으로 시각적효과주기
+}
+};
+    
+    
+removeTransition = e => {
+if (e.propertyName === "transform") {
+e.target.classList.remove("playing");
+}
+};
+window.addEventListener("keydown", playSound);
+const pianoElList = document.querySelectorAll("li");
+pianoElList.forEach(el => {
+el.addEventListener("transitionend", removeTransition);
+});
+//keyup은 쓸 필요가 없음--->재생시간이 짧고, 피아노는 누르고
+//    있는만큼 소리가 나면 안되서. 그렇게 되지도 않을거고??    
+
+
+
+      
+    
+});
+    </script>
+</head>
+<body>
+   <div id="wrap">
+     <header>
+        <div class="inner">
+            <h1 class="logo">
+              <a href="#"><img src="image/logo_gray.png" alt="로고"></a>
+            </h1>
+            <span class="toggle">
+               <a href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+               </a>
+            </span>
+            <div class="header_box">
+              <ul class="top_menu">
+                  <li><a href="#">
+                   <i class="fas fa-map-marker-alt"></i>
+                   </a>
+                  </li>
+                  <li><a href="#">
+                   <i class="fas fa-globe"></i>
+                   </a>
+                  </li>
+              </ul>
+              <ul class="main_menu">
+                  <li>
+                    <a href="#">STEINWAY</a>
+                    <ul class="sub_menu">
+                      <li><a href="#">STEINWAY & SONS</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">SPIRIO</a>
+                    <ul class="sub_menu">
+                      <li><a href="#">SPIRIO R</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">PIANOS</a>
+                    <ul class="sub_menu">
+                      <li><a href="#">GRAND</a></li>
+                      <li><a href="#">UPRIGHTS</a></li>
+                      <li><a href="#">SPECIAL</a></li>
+                      <li><a href="#">LIMITED</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">EDUCATION</a>
+                    <ul class="sub_menu">
+                      <li><a href="#">FIND A TEACHER</a></li>
+                      <li><a href="#">MUSIC TEACHERS</a></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="#">SERVICE</a>
+                    <ul class="sub_menu">
+                      <li><a href="#">NEWS</a></li>
+                      <li><a href="#">SERVICE</a></li>
+                    </ul>
+                  </li>
+              </ul>
+            </div>
+        </div>
+     </header>
+     <div id="slider">
+        <div class="inner">
+          <ul class="slide clear">
+            <li>
+             <div class="txtbox">
+                <h2 class="title">STEINWAY CROWN JEWEL</h2>
+                <p class="text">MAKE YOUR STEINWAY GRAND a crown jewel.<br>The STEINWAY CROWN JEWEL COLLECTION is an exclusive series of rare, fine veneers available in all STEINWAY grand models.</p>
+                <a href="#" class="select">select color
+                 <i class="fas fa-caret-right"></i>
+                </a>
+                <button class="btn">More Infomation</button>
+             </div>
+             <img src="image/crown/AFRICAN%20POMMELE.png" alt="0">
+             <img src="image/crown/AMBER%20WOOD.png" alt="1">
+             <img src="image/crown/EAST%20INDIAN%20ROSEWOOD.png" alt="2">
+             <img src="image/crown/KEWAZINGA%20BUBINGA.png" alt="3">
+             <img src="image/crown/KOA.png" alt="4">
+             <img src="image/crown/MACASSAR%20EBONY.png" alt="5">
+             <img src="image/crown/SANTOS%20ROSEWOOD.png" alt="6">
+             <img src="image/crown/TIGER%20MAHOGANY.png" alt="7">
+             <img src="image/crown/TRADITIONAL%20MAHOGANY.png" alt="8">
+             <img src="image/crown/WALNUT.png" alt="9">
+             <img src="image/crown/FIGURED%20SYCAMORE.png" alt="10">
+             <img src="image/crown/INDIAN%20APPLE1.png" alt="11">
+            <div id="color">
+            <p>Select your color!</p>
+            <ul class="color_list">
+              <li>
+                  <a href="#"><img src="image/crown/africanPommele.jpg" alt="0"></a>
+                  <h3 class="color_name">African<br>Pommele</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/Amber_Wood.jpg" alt="1"></a>
+                  <h3 class="color_name">Amber<br>Wood</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/East_Indian_Rosewood.jpg" alt="2"></a>
+                  <h3 class="color_name">EastIndian<br>Rosewood</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/Kewazinga_Bubinga.jpg" alt="3"></a>
+                  <h3 class="color_name">Kewazinga<br>Bubinga</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/koa.jpg" alt="4"></a>
+                  <h3 class="color_name">koa</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/Macassar_Ebony.jpg" alt="5"></a>
+                  <h3 class="color_name">Macassar<br>Ebony</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/Santos.jpg" alt="6"></a>
+                  <h3 class="color_name">Santos</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/tigerMahogany.jpg" alt="7"></a>
+                  <h3 class="color_name">tiger<br>Mahogany</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/traditionalMohogany.jpg" alt="8"></a>
+                  <h3 class="color_name">traditional<br>Mohogany</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/walnut.jpg" alt="9"></a>
+                  <h3 class="color_name">walnut</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/swatch_FiguredSycamore_Final.jpg" alt="10"></a>
+                  <h3 class="color_name">FIGURED<br>SYCAMORE</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/crown/swatch_IndianApple_Final.jpg" alt="11"></a>
+                  <h3 class="color_name">INDIAN<br>APPLE</h3>
+              </li>
+            </ul>    
+          </div>
+            </li>
+            <li>
+              <div class="txtbox">
+                <h2 class="title">DRAMATIC ELEGANCE</h2>
+                <p class="text">The dynamic DUET SERIES from STEINWAY & SONS pairs 
+our finest rare veneers with our classic high-gloss finish. 
+With three different pairings to choose from, this unique design 
+complements any home decor. Both the Ebony + Macassar and 
+the white Duets all feature a silver cast-iron plate and Nickel hardware.</p>
+                <a href="#" class="select">select color
+                 <i class="fas fa-caret-right"></i>
+                </a>
+                <button class="btn">More Infomation</button>
+             </div>
+             <img src="image/Duet/images/Untitled-1_06.png" alt="0" class="black">
+             <img src="image/Duet/images/Untitled-1_03.png" alt="0" class="white">
+             <img src="image/Duet/images/Untitled-1_06.png" alt="1">
+             <img src="image/Duet/images/Untitled-1_012.png" alt="2">
+             <img src="image/Duet/images/Untitled-133_06.png" alt="3">
+            <div id="color">
+             <p>Select your color!</p>
+             <ul class="color_list">
+              <li>
+                  <a href="#"><img src="image/Duet/swatch_black_macassar.jpg" alt="0"></a>
+                  <h3 class="color_name">black<br>macassar</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/Duet/swatch_white_sycamore.jpg" alt="1"></a>
+                  <h3 class="color_name">white<br>sycamore</h3>
+              </li>
+              <li>
+                  <a href="#"><img src="image/Duet/swatch_white_rosewood.jpg" alt="2"></a>
+                  <h3 class="color_name">white<br>Rosewood</h3>
+              </li>
+            </ul>    
+          </div>
+            </li>
+            <li>
+              <div class="txtbox">
+                <h2 class="title">THE TEAGUE SKETCH 1111</h2>
+                <p class="text">Simple and sophisticated, THE TEAGUE SKETCH 1111 comes
+ in a dark-walnut veneer or a satin ebony finish, with a simplified case, 
+tapered legs, tailored arms, and subtle brass ferrule accents. Available
+ as a model M (the STEINWAY “studio grand”), THE TEAGUE SKETCH 
+1111 is a natural fit in mid-century styled homes and in contemporary 
+styled décors.</p>
+            <button class="btn">More Infomation</button>
+             </div> 
+             <img src="image/sketch1111/test.png" alt="">
+             <div class="info">
+                <h4>Available in Ebony Polish,<br>Ebony Satin & Dark Walnut</h4>
+                <div class="colorbox">
+                  <img src="image/sketch1111/teague_swatches3.2021-04-02-21-23-08.jpg" alt="">
+                </div>
+                <p>With THE TEAGUE SKETCH 1111, STEINWAY is delighted to marry 
+Henry STEINWAY’S timeless aesthetic and legacy of innovation 
+to that of the peerless Walter Dorwin Teague. </p>
+             </div>
+             
+            </li>
+          </ul>
+          <div id="thumb">
+              <div class="thumbnail">
+                <div class="box">
+                 <ul class="thumb_imgbox">
+                 <li>
+                  <img src="image/Thumbnail/2_06.jpg" alt="0">
+                  <div class="thumb_bg">
+                    <h4>THE DUET SERIES</h4>
+                  </div>
+                  </li>
+                  <li>
+                  <img src="image/Thumbnail/Untitled-1_06.jpg" alt="1">
+                  <div class="thumb_bg">
+                      <h4>THE TEAGUE SKETCH 1111</h4>
+                  </div>
+                  </li>
+                  <li>
+                  <img src="image/Thumbnail/3_06.jpg" alt="2">
+                  <div class="thumb_bg">
+                      <h4>CROWN JEWEL COLLECTION</h4>
+                  </div>
+                  </li>
+                 </ul>
+                </div>
+                 <div class="black_bar">
+                  <i class="fas fa-caret-right"></i>
+                 </div>
+              </div>
+          </div>
+          <div id="dot">
+              <span class="on"></span>
+              <span></span>
+              <span></span>
+          </div>
+        </div>
+     </div>
+     <div id="content">
+        <section class="con1">
+           <div class="inner">
+            <h2 class="con1_title">THE STEINWAY family</h2>
+            <p class="con1_text">스타인웨이는 160년이 넘는 세월 동안 세계 최고의 피아노 제작에 전념
+해왔으며 사운드, 터치, 아름다움 및 투자 가치에 대해 타협하지 않는 표준을
+ 세웠습니다. 스타인웨이는 세계 최고의 피아노이며 전공생을 위한 보스톤 
+퍼포먼스 에디션, 스타인웨이 패밀리 입문을 위한 에섹스 스튜디오에 
+이르기까지 모든 사람들을 위한 피아노 라인업을 선보이고 있습니다.<br><br>
+         <span>순수한 예술적 표현은 터치하고, 움직이며 변형되는 힘을 지니고 있습니다.
+스타인웨이 피아노는 아티스트의 순수하고 타협하지 않는 표현과
+청중 사이의 모든 장벽을 없애기 위해 존재합니다.  </span>             </p>
+          </div>
+        </section>
+        <section class="con2">
+            <div class="con2_txtbox">
+            <p class="con2_text">
+            To call a genuine grand or upright of STEINWAY & SONS one’s own is
+ an overwhelming feeling.<br> Far more than just an exquisite instrument, 
+it is an instrument of the highest expression and creativity.<br> 
+A STEINWAY intimately connects artist and listener, and invites 
+its owner to join a tradition of musical perfection,<br> making it 
+an invaluable investment.
+            </p>
+<!--            <p class="typing"></p>-->
+          </div>
+           
+        </section>
+        <section class="con3">
+            <div class="inner">
+              <ul class="piano">
+                  <li><a href="#"><img src="image/con3/grand.jpg" alt=""></a>
+                    <div class="con3_bg">
+                    <h3 class="con3_title">Grand</h3></div>
+                  </li>
+                  <li><a href="#"><img src="image/con3/lim.jpg" alt=""></a>
+                  <div class="con3_bg">
+                   <h3 class="con3_title">Special</h3></div>
+                  </li>
+                  <li><a href="#"><img src="image/con3/limited.jpg" alt=""></a>
+                  <div class="con3_bg">
+                   <h3 class="con3_title">Limited<br><span>LA MEA</span></h3></div>
+                  </li>
+                  <li><a href="#"><img src="image/con3/limited2.jpg" alt=""></a>
+                  <div class="con3_bg">
+                   <h3 class="con3_title">Limited<br><span>LENNY KRAVITZ</span></h3></div>
+                  </li>
+                  <li><a href="#"><img src="image/con3/upright.jpg" alt=""></a>
+                  <div class="con3_bg">
+                   <h3 class="con3_title">Uprights</h3></div>
+                  </li>
+                  
+              </ul>  
+            </div>
+        </section>
+        <section class="con4">
+        <h1>Steinway Piano Sound</h1>
+         <div class="inner">
+           
+           <div class="con4_left">
+           <h3>*피아노 건반에 해당하는 키보드를 눌러 음을 연주해보세요.</h3>
+           <img src="image/piano.jpg" alt="">
+           <section>
+              <ul id="white">
+                <li data-key="65" class="key">
+                <span>A</span>
+                </li>
+                <li data-key="83" class="key">
+                <span>S</span>
+                </li>
+                <li data-key="68" class="key">
+                <span>D</span>
+                </li>
+                <li data-key="70" class="key">
+                <span>F</span>
+                </li>
+                <li data-key="71" class="key">
+                <span>G</span>
+                </li>
+                <li data-key="72" class="key">
+                <span>H</span>
+                </li>
+                <li data-key="74" class="key">
+                <span>J</span>
+                </li>
+                <li data-key="75" class="key">
+                <span>K</span>
+                </li>
+              </ul>
+              <ul id="black">
+                <li data-key="87" class="key">
+                <span>W</span>
+                </li>
+                <li data-key="69" class="key">
+                <span>E</span>
+                </li>
+                <li data-key="84" class="key">
+                <span>T</span>
+                </li>
+                <li data-key="88" class="key">
+                <span>Y</span>
+                </li>
+                <li data-key="85" class="key">
+                <span>U</span>
+                </li>
+              </ul>
+            </section>
+        </div>
+
+        <audio data-key="65" src="image/sound1.mp3"></audio>
+        <audio data-key="83" src="image/sound2.mp3"></audio>
+        <audio data-key="68" src="image/sound3.mp3"></audio>
+        <audio data-key="70" src="image/sound4.mp3"></audio>
+        <audio data-key="71" src="image/sound5.mp3"></audio>
+        <audio data-key="72" src="image/sound6.mp3"></audio>
+        <audio data-key="74" src="image/sound7.mp3"></audio>
+        <audio data-key="75" src="image/sound8.mp3"></audio>
+        
+        <div class="con4_right">
+        <h3>*Steinway Hall in New York City. </h3>
+        <iframe src="https://www.youtube.com/embed/QyV1HVvcvkQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <p>Sunwook Kim — Sonata in C sharp minor, Op. 27 No. 2  “Moonlight”: I. Adagio sostenuto<br>Steinway Artist Sunwook Kim, one of the finest concert pianists of Korea, performs the celebrated Adagio sostenuto from Beethoven‘s immortal “Moonlight” Sonata at Steinway Hall in New York City. Beethoven student Carl Czerny called the movement “a nocturnal scene, in which a mournful ghostly voice sounds from the distance.”</p>
+        <a href="#"><img src="image/con4.jpg" alt=""></a>
+        </div>
+        </div>
+     </section>
+     </div>
+     <div class="sitemap">
+       <div class="inner">
+        <ul class="sitemap_list">
+            <li><a href="3">contact us</a></li>
+            <li><a href="#">newsletter</a></li>
+            <li><a href="#">tours</a></li>
+            <li><a href="#">privacy policy</a></li>
+            <li><a href="#">Your Data Preferences</a></li>
+            <li><a href="#">Institutions</a></li>
+        </ul>
+         
+     </div>
+     </div>
+     <footer>
+       <div class="inner">
+        <p class="left">
+©2021 Steinway & Sons. Steinway and the Lyre are registered trademarks.<br>
+One Steinway Place, Astoria, NY 11105 - (718) 721-2600</p>
+        <ul class="right">
+            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+        </ul>
+        </div>
+     </footer> 
+    </div>
+    <script>
+        
+    let toggle = document.querySelector('.toggle');
+    let mlist = document.querySelector('.main_menu');
+        
+//        console.log(toggle);
+        toggle.addEventListener('click', function() {
+            mlist.classList.toggle("show");
+                                });
+        
+    function load() {
+         let w = window.innerWidth;
+        let h = window.innerHeight;
+//        let show = document.querySelector('show');
+        console.log(w, h);
+        let mlist_li = document.querySelectorAll('.main_menu>li');
+//        function onmouseOver() {
+//            this.children[1].style.display = 'block';
+//        }  
+//        function onmouseOut() {
+//            this.children[1].style.display = 'none';
+//        }
+//        var old_element = document.getElementById("btn"); var new_element = old_element.cloneNode(true); old_element.parentNode.replaceChild(new_element, old_element);
+
+        if( (w-16) >= 901) {
+        for(let i = 0; i < mlist_li.length; i++) {
+          mlist_li[i].addEventListener('mouseover', function(){
+            this.children[1].style.display = 'block';
+          });
+         mlist_li[i].addEventListener('mouseout', function(){
+            this.children[1].style.display = 'none';
+          });
+            
+            }; //for문 종료
+       
+           } else { //900px 이하
+            
+           for(let i = 0; i < mlist_li.length; i++) {
+//          mlist_li[i].removeEventListener('mouseover', onmouseOver);
+//          mlist_li[i].removeEventListener('mouseout', onmouseOut);  ????
+            
+               //제거하고자 하는 엘리먼트
+
+            let new_element = mlist_li[i].cloneNode(true);
+            let ch = new_element.children[1];
+//            console.log(new_element, ch); 
+            mlist_li[i].parentNode.replaceChild(new_element, mlist_li[i]);  
+               
+            new_element.children[1].style.display = 'none';   
+            new_element.addEventListener('click', function(){
+//              this.children[1].classList.toggle("show");
+            if(this.children[1].style.display != 'none') {
+               this.children[1].style.display = 'none';
+               } else {
+                this.children[1].style.display = 'block';   
+               }
+              });  
+           }
+           
+               
+         
+      }
+    };
+    window.addEventListener('load', load);
+    window.addEventListener('resize', load);
+    
+        
+    
+        
+        
+
+        //.slide>li 첫번째
+        let color = document.getElementsByClassName('color_list');
+        let color_li = color[0].children; //12개
+        let color_li_1 = color[1].children; //3개
+        let img = document.querySelectorAll('.slide>li:first-child>img'); //12개
+        let img_2 = document.querySelectorAll('.slide>li:nth-child(2)>img'); //5개
+        let bimg = document.querySelector('.black');
+//        
+//        console.log(color, color_li, color_li_1, img, img_2, bimg);
+        
+        for(let i = 0; i < color_li.length; i++){
+          color_li[i].addEventListener('click', function(){
+            for(let j = 0; j < img.length; j++){
+               if(i == j) {
+//                  alert('me!');
+                   img[j].style.display = 'block';
+
+                } else {
+                    img[j].style.display = 'none';
+                }
+            }
+//            console.log("click", i );
+        });  
+    }
+        //.slide li 두번째
+        for(let i = 0; i < color_li_1.length; i++){
+            
+       color_li_1[i].addEventListener('click', function(){
+           
+        let getImg = img_2[i+2].getAttribute('src');
+        bimg.setAttribute('src', getImg);  
+       });
+       }  
+
+        
+        
+        //모바일 슬라이드
+        let slideList = document.querySelectorAll('.slide>li'); 
+        let ch = document.getElementById('dot').children;
+        console.log(slideList,ch);
+        
+        for(let i = 0; i < slideList.length; i++){
+            ch[i].addEventListener('click', function(){
+              
+              for(let j = 0; j < ch.length; j++){
+                if (i == j) {
+//                    alert('red!');
+                slideList[j].style.display = 'block';
+                ch[j].classList.add('on');
+//                ch[j].style.backgroundColor = '#333';
+                } else {
+                slideList[j].style.display = 'none';
+                ch[j].classList.remove('on');
+                    
+                }
+              }
+            });
+            
+        }
+      //      -제자리에서 fade in out 슬라이더
+//setInterval(function(){
+//$(".slideBox>li").filter(":visible").fadeOut(1000).next("li").fadeIn(500);
+//$(".slideBox>li:first").insertAfter(".slideBox>li:last"); //첫번째 이미지 떼다가 마지막에 붙임
+            
+        
+    </script>
+</body>
+</html>
